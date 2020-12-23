@@ -20,6 +20,9 @@ INFO:
 	CPU: %d
 	GO : %s
 `
+
+	// DefaultApp pointer to active Application
+	DefaultApp *Application
 )
 
 // Application structure to store application information
@@ -44,7 +47,7 @@ func Init(name, desc, ver, bld string) (*Application, error) {
 		return nil, fmt.Errorf("Not defined app name")
 	}
 
-	return &Application{
+	DefaultApp = &Application{
 		Name:        name,
 		Description: desc,
 		Version:     ver,
@@ -53,7 +56,9 @@ func Init(name, desc, ver, bld string) (*Application, error) {
 		Arch:        runtime.GOARCH,
 		CPU:         runtime.NumCPU(),
 		GOVersion:   runtime.Version(),
-	}, nil
+	}
+
+	return DefaultApp, nil
 }
 
 func (a *Application) String() string {
