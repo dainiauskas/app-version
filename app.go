@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"runtime"
 
+	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
 )
 
@@ -23,6 +24,15 @@ INFO:
 
 	// DefaultApp pointer to active Application
 	DefaultApp *Application
+
+	Command = &cobra.Command{
+		Use:   "version",
+		Short: "Print the version number",
+		Run: func(cmd *cobra.Command, args []string) {
+			app := DefaultApp
+			fmt.Println(app.String())
+		},
+	}
 )
 
 // Application structure to store application information
@@ -40,11 +50,11 @@ type Application struct {
 // Init for initialize Application structure
 func Init(name, desc, ver, bld string) (*Application, error) {
 	if ok := semver.IsValid(ver); !ok {
-		return nil, fmt.Errorf("Wrong version: %s", ver)
+		return nil, fmt.Errorf("wrong version: %s", ver)
 	}
 
 	if name == "" {
-		return nil, fmt.Errorf("Not defined app name")
+		return nil, fmt.Errorf("not defined app name")
 	}
 
 	DefaultApp = &Application{
