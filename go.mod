@@ -1,4 +1,4 @@
-module bitbucket.org/butenta/app-version
+module github.com/ButentaLT/app-version
 
 go 1.15
 
