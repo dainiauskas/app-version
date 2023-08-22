@@ -1,4 +1,4 @@
-module github.com/ButentaLT/app-version
+module github.com/dainiauskas/app-version
 
 go 1.15
 
